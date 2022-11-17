@@ -42,6 +42,7 @@ public class ThisCard : MonoBehaviour
         {
             thisCard [0] = CardDatabase.cardList[thisId];
         }
+        
         id = thisCard[0].id;
         cardName = thisCard[0].cardName;
         cost=thisCard[0].cost;
