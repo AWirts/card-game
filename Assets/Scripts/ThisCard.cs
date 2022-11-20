@@ -27,6 +27,9 @@ public class ThisCard : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI descriptionText; 
 
+    public bool cardBack;
+    public static bool staticCardBack;
+
     public Image thatImage;
 
     // Start is called before the first frame update
@@ -60,5 +63,6 @@ public class ThisCard : MonoBehaviour
         descriptionText.text=""+cardDescription;
 
         thatImage.sprite=thisSprite;
+        staticCardBack=cardBack;
     }
 }

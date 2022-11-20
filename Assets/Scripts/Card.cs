@@ -16,6 +16,10 @@ public class Card
     public int health;
     public Sprite thisImage;
 
+    public Card ()
+    {
+        
+    }
     public Card(int Id, string CardName, int Cost, int Stamina, int Attack, int Health, string CardDescription, Sprite ThisImage)
     {
         id=Id;
