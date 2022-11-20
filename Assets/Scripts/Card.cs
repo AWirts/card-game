@@ -1,51 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+[System.Serializable]
+
+public class Card
 {
-	public bool hasBeenPlayed;
-	public int handIndex;
+    public int id;
+    public string cardName;
+    public string cardDescription;
+    public int cost;
+    public int stamina;
+    public int attack;
+    public int health;
+    public Sprite thisImage;
 
-	GameManager gm;
+    public Card ()
+    {
+        
+    }
+    public Card(int Id, string CardName, int Cost, int Stamina, int Attack, int Health, string CardDescription, Sprite ThisImage)
+    {
+        id=Id;
+        cardName=CardName;
+        cost=Cost;
+        stamina=Stamina;
+        attack=Attack;
+        health=Health;
+        cardDescription=CardDescription;
 
-	private Animator anim;
-	private Animator camAnim;
-
-	public GameObject effect;
-	public GameObject hollowCircle;
-
-	private void Start()
-	{
-		gm = FindObjectOfType<GameManager>();
-		anim = GetComponent<Animator>();
-		camAnim = Camera.main.GetComponent<Animator>();
-	}
-	private void OnMouseDown()
-	{
-		if (!hasBeenPlayed)
-		{
-			Instantiate(hollowCircle, transform.position, Quaternion.identity);
-			
-			camAnim.SetTrigger("shake");
-			anim.SetTrigger("move");
-
-			transform.position += Vector3.up * 3f;
-			hasBeenPlayed = true;
-			gm.availableCardSlots[handIndex] = true;
-			Invoke("MoveToDiscardPile", 2f);
-
-			
-		}
-	}
-
-	void MoveToDiscardPile()
-	{
-		Instantiate(effect, transform.position, Quaternion.identity);
-		gm.discardPile.Add(this);
-		gameObject.SetActive(false);
-	}
-
-
-
+        thisImage = ThisImage;
+    }
+   
 }
