@@ -6,9 +6,44 @@ public class PlayerDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card> ();
     public Card container = new Card ();
+    public static List<Card> staticDeck = new List<Card> ();
 
     public int x;
-    public int deckSize;
+    public static int deckSize;
+
+    public GameObject cardInDeck1;
+    public GameObject cardInDeck2;
+    public GameObject cardInDeck3;
+    public GameObject cardInDeck4;
+   
+    public GameObject CardToHand;
+    public GameObject CardBack;
+    public GameObject Deck;
+    public GameObject[] Clones;
+    public GameObject Hand;
+
+    
+    IEnumerator Example()
+    {
+        yield return new WaitForSeconds(1);
+        Clones = GameObject.FindGameObjectsWithTag("Clone");
+        foreach (GameObject Clone in Clones)
+        {
+            Destroy(Clone);   
+        }
+    }
+
+    IEnumerator StartGame()
+    {
+        for(int i=0;i<=4;i++)
+        {
+            for(int j=0;j<=4;j++)
+            {
+                yield return new WaitForSeconds(1);
+                Instantiate(CardToHand,transform.position,transform.rotation); 
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +56,30 @@ public class PlayerDeck : MonoBehaviour
             x= Random.Range(1, 4);
             deck.Add(CardDatabase.cardList[x]);
         }
+        StartCoroutine(StartGame());
     }
 
+    void Update()
+    {
+        staticDeck = deck;
+        if(deckSize<30)
+        {
+            cardInDeck1.SetActive(false);
+        }
+        if(deckSize<20)
+        {
+            cardInDeck2.SetActive(false);
+        }
+        if(deckSize<2)
+        {
+            cardInDeck3.SetActive(false);
+        }
+        if(deckSize<1)
+        {
+            cardInDeck4.SetActive(false);
+        }
+    }
+    
     public void Shuffle()
     {
         for(int i=0;i<deckSize;i++)
@@ -33,5 +90,7 @@ public class PlayerDeck : MonoBehaviour
             deck[randomIndex]=container;
         }
 
+        Instantiate(CardBack,transform.position,transform.rotation);
+        StartCoroutine(Example());
     }
 }

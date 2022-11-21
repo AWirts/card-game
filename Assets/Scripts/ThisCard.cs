@@ -32,15 +32,24 @@ public class ThisCard : MonoBehaviour
 
     public Image thatImage;
 
+    public GameObject Hand;
+    public int numberOfCardsInDeck;
+
     // Start is called before the first frame update
     void Start()
     {
         thisCard.Add(CardDatabase.cardList[thisId]);
+        numberOfCardsInDeck = PlayerDeck.deckSize;
        
     }
 
     void Update()
     {
+        Hand = GameObject.Find("Hand");
+        if(this.transform.parent == Hand.transform.parent)
+        {
+            cardBack = false;
+        }
         if (id != thisId)
         {
             thisCard [0] = CardDatabase.cardList[thisId];
@@ -64,5 +73,14 @@ public class ThisCard : MonoBehaviour
 
         thatImage.sprite=thisSprite;
         staticCardBack=cardBack;
+
+        if(this.tag == "Clone")
+        {
+            thisCard[0] = PlayerDeck.staticDeck[numberOfCardsInDeck-1];
+            numberOfCardsInDeck -= 1;
+            PlayerDeck.deckSize -= 1;
+            cardBack = false;
+            this.tag = "Untagged";
+        }
     }
 }
