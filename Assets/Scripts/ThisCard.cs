@@ -7,7 +7,7 @@ using TMPro;
 
 public class ThisCard : MonoBehaviour
 {
-    private List<Card> thisCard = new List<Card> ();
+    private Card thisCard = new Card ();
     public int thisId;
 
     public int id;
@@ -27,42 +27,38 @@ public class ThisCard : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI descriptionText; 
 
-    public bool cardBack;
-    public static bool staticCardBack;
-
     public Image thatImage;
 
+    public bool cardBack;
+    public bool canBeSummon;
+    public bool summoned;
+    public static bool staticCardBack;
+
+
     public GameObject Hand;
+    public GameObject battleZone;
     public int numberOfCardsInDeck;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        thisCard.Add(CardDatabase.cardList[thisId]);
+        thisCard = CardDatabase.cardList[thisId];
         numberOfCardsInDeck = PlayerDeck.deckSize;
-       
+        canBeSummon = false;
+        summoned = false;
     }
 
     void Update()
     {
-        Hand = GameObject.Find("Hand");
-        if(this.transform.parent == Hand.transform.parent)
-        {
-            cardBack = false;
-        }
-        if (id != thisId)
-        {
-            thisCard [0] = CardDatabase.cardList[thisId];
-        }
-        
-        id = thisCard[0].id;
-        cardName = thisCard[0].cardName;
-        cost=thisCard[0].cost;
-        stamina=thisCard[0].stamina;
-        attack=thisCard[0].attack;
-        health=thisCard[0].health;
-        cardDescription=thisCard[0].cardDescription;
-        thisSprite=thisCard[0].thisImage;
+        id = thisCard.id;
+        cardName = thisCard.cardName;
+        cost=thisCard.cost;
+        stamina=thisCard.stamina;
+        attack=thisCard.attack;
+        health=thisCard.health;
+        cardDescription=thisCard.cardDescription;
+        thisSprite=thisCard.thisImage;
 
         nameText.text=""+cardName;
         costText.text=""+cost;
@@ -72,15 +68,39 @@ public class ThisCard : MonoBehaviour
         descriptionText.text=""+cardDescription;
 
         thatImage.sprite=thisSprite;
-        staticCardBack=cardBack;
+        staticCardBack = cardBack;
 
         if(this.tag == "Clone")
         {
-            thisCard[0] = PlayerDeck.staticDeck[numberOfCardsInDeck-1];
+            thisCard = PlayerDeck.staticDeck[numberOfCardsInDeck-1];
             numberOfCardsInDeck -= 1;
             PlayerDeck.deckSize -= 1;
             cardBack = false;
             this.tag = "Untagged";
+
+            if(TurnSystem.currentStamina >= cost && summoned == false)
+            {
+                canBeSummon = true;
+                gameObject.GetComponent<Draggable>().enabled = true;
+            }
+            else 
+            {
+                canBeSummon = false;
+                gameObject.GetComponent<Draggable>().enabled = false;
+            }
+
+            battleZone = GameObject.Find("Zone");
+
+            if(summoned == false && this.transform.parent == battleZone.transform)
+            {
+                Summon();
+            }
         }
+    }
+    
+    public void Summon()
+    {
+        TurnSystem.currentStamina -= cost;
+        summoned = true;
     }
 }

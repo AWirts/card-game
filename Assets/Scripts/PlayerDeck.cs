@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card> ();
-    public Card container = new Card ();
+    private Card container = new Card ();
     public static List<Card> staticDeck = new List<Card> ();
 
-    public int x;
+    private int x;
     public static int deckSize;
 
     public GameObject cardInDeck1;
@@ -19,29 +19,14 @@ public class PlayerDeck : MonoBehaviour
     public GameObject CardToHand;
     public GameObject CardBack;
     public GameObject Deck;
-    public GameObject[] Clones;
     public GameObject Hand;
-
-    
-    IEnumerator Example()
-    {
-        yield return new WaitForSeconds(1);
-        Clones = GameObject.FindGameObjectsWithTag("Clone");
-        foreach (GameObject Clone in Clones)
-        {
-            Destroy(Clone);   
-        }
-    }
 
     IEnumerator StartGame()
     {
         for(int i=0;i<=4;i++)
         {
-            for(int j=0;j<=4;j++)
-            {
-                yield return new WaitForSeconds(1);
-                Instantiate(CardToHand,transform.position,transform.rotation); 
-            }
+            yield return new WaitForSeconds(1);
+            Instantiate(CardToHand,transform.position,transform.rotation); 
         }
     }
 
@@ -89,8 +74,5 @@ public class PlayerDeck : MonoBehaviour
             deck[i]=deck[randomIndex];
             deck[randomIndex]=container;
         }
-
-        Instantiate(CardBack,transform.position,transform.rotation);
-        StartCoroutine(Example());
     }
 }

@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardToHand
       objectReference: {fileID: 0}
+    - target: {fileID: 2627648011784658556, guid: 1c29b674b4d1f734aa8dc4830e5fabdf, type: 3}
+      propertyPath: m_TagString
+      value: Clone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c29b674b4d1f734aa8dc4830e5fabdf, type: 3}
 --- !u!1 &1773286115023169342 stripped
@@ -102,6 +106,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2627648011784658556, guid: 1c29b674b4d1f734aa8dc4830e5fabdf, type: 3}
   m_PrefabInstance: {fileID: 4390092242043877698}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5707264094946308784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773286115023169342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f861f63b5302e14196afb246a1757e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentToReturnTo: {fileID: 0}
+  placeholderParent: {fileID: 0}
 --- !u!114 &8988950547677142198
 MonoBehaviour:
   m_ObjectHideFlags: 0

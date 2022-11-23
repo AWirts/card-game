@@ -806,9 +806,12 @@ MonoBehaviour:
   attackText: {fileID: 2627648010847647864}
   healthText: {fileID: 2627648012256722425}
   descriptionText: {fileID: 2627648012129067902}
-  cardBack: 0
   thatImage: {fileID: 2627648011702352033}
+  cardBack: 1
+  canBeSummon: 0
+  summoned: 0
   Hand: {fileID: 0}
+  battleZone: {fileID: 0}
   numberOfCardsInDeck: 0
 --- !u!114 &2627648011784658551
 MonoBehaviour:
