@@ -77,24 +77,23 @@ public class ThisCard : MonoBehaviour
             PlayerDeck.deckSize -= 1;
             cardBack = false;
             this.tag = "Untagged";
+        }
+        if(TurnSystem.currentStamina >= cost && summoned == false)
+        {
+            canBeSummon = true;
+            gameObject.GetComponent<Draggable>().enabled = true;
+        }
+        else 
+        {
+            canBeSummon = false;
+            gameObject.GetComponent<Draggable>().enabled = false;
+        }
 
-            if(TurnSystem.currentStamina >= cost && summoned == false)
-            {
-                canBeSummon = true;
-                gameObject.GetComponent<Draggable>().enabled = true;
-            }
-            else 
-            {
-                canBeSummon = false;
-                gameObject.GetComponent<Draggable>().enabled = false;
-            }
+        battleZone = GameObject.Find("Zone");
 
-            battleZone = GameObject.Find("Zone");
-
-            if(summoned == false && this.transform.parent == battleZone.transform)
-            {
-                Summon();
-            }
+        if(summoned == false && this.transform.parent == battleZone.transform)
+        {
+            Summon();
         }
     }
     

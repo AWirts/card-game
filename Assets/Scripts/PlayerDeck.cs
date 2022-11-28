@@ -10,6 +10,7 @@ public class PlayerDeck : MonoBehaviour
 
     private int x;
     public static int deckSize;
+    private bool handStart = false;
 
     public GameObject cardInDeck1;
     public GameObject cardInDeck2;
@@ -28,6 +29,7 @@ public class PlayerDeck : MonoBehaviour
             yield return new WaitForSeconds(1);
             Instantiate(CardToHand,transform.position,transform.rotation); 
         }
+        handStart = true;
     }
 
     // Start is called before the first frame update
@@ -41,12 +43,13 @@ public class PlayerDeck : MonoBehaviour
             x= Random.Range(1, 4);
             deck.Add(CardDatabase.cardList[x]);
         }
+        staticDeck = deck;
         StartCoroutine(StartGame());
     }
 
     void Update()
     {
-        staticDeck = deck;
+        
         if(deckSize<30)
         {
             cardInDeck1.SetActive(false);
@@ -62,6 +65,13 @@ public class PlayerDeck : MonoBehaviour
         if(deckSize<1)
         {
             cardInDeck4.SetActive(false);
+        }
+        if(handStart)
+        {
+            if(Hand.transform.childCount == 0){
+                handStart = false;
+                StartCoroutine(StartGame());
+            }
         }
     }
     
