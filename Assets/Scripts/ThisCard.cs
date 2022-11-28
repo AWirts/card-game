@@ -39,6 +39,19 @@ public class ThisCard : MonoBehaviour
     public GameObject battleZone;
     public int numberOfCardsInDeck;
 
+    public GameObject attackBorder;
+    public GameObject Target;
+    public GameObject Enemy;
+
+    public bool summoningSickness;
+    public static bool staticTargeting;
+    public static bool staticTargetingEnemy;
+
+    public bool canAttack;
+    public bool attackedThisTurn;
+    public bool targeting;
+    public bool targetingEnemy;
+    public bool onlyThisCardAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +60,12 @@ public class ThisCard : MonoBehaviour
         numberOfCardsInDeck = PlayerDeck.deckSize;
         canBeSummon = false;
         summoned = false;
+
+        canAttack = false;
+        summoningSickness = true;
+        Enemy = GameObject.Find("OpponentHP");
+        targeting=false;
+        targetingEnemy=false;
     }
 
     void Update()
@@ -95,11 +114,87 @@ public class ThisCard : MonoBehaviour
         {
             Summon();
         }
+
+        if(canAttack==true)
+        {
+            attackBorder.SetActive(true);
+        }else
+        {
+            attackBorder.SetActive(false);
+        }
+
+        if(TurnSystem.isYourTurn == false && summoned == true)
+        {
+            summoningSickness = false;
+        }
+
+        if(TurnSystem.isYourTurn == true && summoningSickness==false && attackedThisTurn == false)
+        {
+            canAttack=true;
+        }
+        else{
+            canAttack=false;
+        }
+
+        targeting=staticTargeting;
+        targetingEnemy=staticTargetingEnemy;
+
+        if(targetingEnemy==true)
+        {
+            Target=Enemy;
+        }
+        else{
+            Target=null;
+        }
+        if(targeting==true && targetingEnemy == true && onlyThisCardAttack == true)
+        {
+            Attack();
+        }
     }
     
     public void Summon()
     {
         TurnSystem.currentStamina -= cost;
         summoned = true;
+    }
+    public void Attack()
+    {
+        if(canAttack)
+        {
+            if(Target != null)
+            {
+                if(Target==Enemy)
+                {
+                    OpponentHP.staticHP-=attack;
+                    targeting=false;
+                    canAttack=false;
+                    attackedThisTurn=true;
+                }
+            }
+        }
+    }
+    public void UntargetEnemy()
+    {
+        staticTargetingEnemy=false;
+    }
+    public void TargetEnemy()
+    {
+        staticTargetingEnemy=true;
+    }
+    public void StartAttack()
+    {
+        staticTargeting=true;
+    }
+    public void StopAttack()
+    {
+        staticTargeting=false;
+    }
+    public void OneCardAttackStart()
+    {
+        onlyThisCardAttack=true;
+    }
+    public void OneCardAttackStop()
+    {
+        onlyThisCardAttack=false;
     }
 }
