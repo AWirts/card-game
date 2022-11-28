@@ -1323,13 +1323,13 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -200
+  m_Spacing: 50
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!1001 &835346336
 PrefabInstance:
@@ -1440,6 +1440,7 @@ GameObject:
   - component: {fileID: 870615145}
   - component: {fileID: 870615143}
   - component: {fileID: 870615142}
+  - component: {fileID: 870615146}
   m_Layer: 5
   m_Name: OpponentHP
   m_TagString: Untagged
@@ -1523,6 +1524,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870615140}
   m_CullTransparentMesh: 1
+--- !u!114 &870615146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870615140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1773286115023169330, guid: f2256a64e2ace5a4bac9f4ac8909ffca, type: 3}
+          m_TargetAssemblyTypeName: ThisCard, Assembly-CSharp
+          m_MethodName: TargetEnemy
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1773286115023169330, guid: f2256a64e2ace5a4bac9f4ac8909ffca, type: 3}
+          m_TargetAssemblyTypeName: ThisCard, Assembly-CSharp
+          m_MethodName: UntargetEnemy
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &941644016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,7 +2274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2b455c33d232a45928938b56e629d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isYourTurn: 0
   yourTurn: 0
   yourOpponentTurn: 0
   turnText: {fileID: 666379835}
@@ -2986,13 +3031,13 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -200
+  m_Spacing: 50
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &1983028806
 MonoBehaviour:

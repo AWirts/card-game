@@ -6,7 +6,7 @@ using TMPro;
 
 public class TurnSystem : MonoBehaviour
 {
-    public bool isYourTurn;
+    public static bool isYourTurn;
     public int yourTurn;
     public int yourOpponentTurn;
 
@@ -63,6 +63,7 @@ public class TurnSystem : MonoBehaviour
             foreach (Transform child in Zone.transform)
             {
                 ThisCard card = child.GetComponent("ThisCard") as ThisCard;
+                card.attackedThisTurn=false;
                 minionStamina += card.stamina;
             }            
             maxStamina+=minionStamina;
