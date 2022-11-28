@@ -14,9 +14,10 @@ public class TurnSystem : MonoBehaviour
 
     public int maxStamina;
     public static int currentStamina;
+    private static int minionStamina;
     public TextMeshProUGUI staminaText;
 
-
+    private GameObject Zone;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class TurnSystem : MonoBehaviour
         yourOpponentTurn = 0;
         maxStamina = 1;
         currentStamina = 1;
-
+        minionStamina = 0;
     }
 
     // Update is called once per frame
@@ -40,6 +41,8 @@ public class TurnSystem : MonoBehaviour
             turnText.text = "Opponent Turn";
         }
         staminaText.text = currentStamina + "/" + maxStamina;
+
+
     }
 
     public void EndYourTurn()
@@ -55,8 +58,15 @@ public class TurnSystem : MonoBehaviour
         if(!isYourTurn)
         {
             isYourTurn = true;
-            yourTurn += 1;
-
+            yourTurn += 1;       
+            Zone = GameObject.Find("Zone");
+            foreach (Transform child in Zone.transform)
+            {
+                ThisCard card = child.GetComponent("ThisCard") as ThisCard;
+                minionStamina += card.stamina;
+            }            
+            maxStamina+=minionStamina;
+            minionStamina=0;
             maxStamina += 1;
             currentStamina = maxStamina;
         }
